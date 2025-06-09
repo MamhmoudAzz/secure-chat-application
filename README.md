@@ -24,25 +24,68 @@ java -version
 
 ## Quick Start
 
-### 1. Clone and Setup
+### 1. Download the Application
+
+**Option A: Clone with Git**
 ```bash
 git clone https://github.com/yourusername/secure-chat-application.git
 cd secure-chat-application
 ```
 
-### 2. Compile and Run
+**Option B: Download ZIP**
+1. Click the green "Code" button on GitHub
+2. Select "Download ZIP"
+3. Extract and navigate to the folder
 
-**Using Maven:**
+### 2. Verify Java Installation
+
+Make sure Java JDK is installed:
+```bash
+java -version
+javac -version
+```
+If not installed, download from [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or [OpenJDK](https://openjdk.org/).
+
+### 3. Compile and Run
+
+**Windows (PowerShell):**
+```powershell
+# Create build directory
+New-Item -ItemType Directory -Force -Path "target\classes"
+
+# Compile all Java files
+Get-ChildItem -Path "src\main\java" -Recurse -Filter "*.java" | ForEach-Object { javac -cp "src\main\java" -d "target\classes" $_.FullName }
+
+# Run the application
+java -cp "target\classes" com.securechat.controller.SecureChatApplication
+```
+
+**Mac/Linux:**
+```bash
+# Create build directory
+mkdir -p target/classes
+
+# Compile all Java files
+find src/main/java -name "*.java" | xargs javac -d target/classes -cp src/main/java
+
+# Run the application
+java -cp target/classes com.securechat.controller.SecureChatApplication
+```
+
+**Using Maven (if installed):**
 ```bash
 mvn clean compile
 mvn exec:java -Dexec.mainClass="com.securechat.controller.SecureChatApplication"
 ```
 
-**Using Command Line:**
+**Quick Start Scripts:**
 ```bash
-mkdir -p target/classes
-javac -cp src/main/java -d target/classes src/main/java/com/securechat/*/*.java
-java -cp target/classes com.securechat.controller.SecureChatApplication
+# Windows: Double-click or run in Command Prompt
+run.bat
+
+# Mac/Linux: Run in terminal
+chmod +x run.sh
+./run.sh
 ```
 
 ### 3. Demo Users
@@ -94,15 +137,30 @@ src/main/java/com/securechat/
 
 ## Troubleshooting
 
+**"javac: command not found"**
+- Install Java JDK (not just JRE)
+- Make sure Java is in your system PATH
+
 **"Cannot find main class"**
 ```bash
-# Ensure correct classpath
+# Make sure you're in the project directory
+# Use correct classpath for your OS:
+
+# Windows:
+java -cp "target\classes" com.securechat.controller.SecureChatApplication
+
+# Mac/Linux:
 java -cp target/classes com.securechat.controller.SecureChatApplication
 ```
 
-**Compilation issues**
-- Make sure JDK (not just JRE) is installed
-- Verify Java version: `javac -version`
+**"Invalid filename" error on Windows**
+- Use PowerShell commands provided above
+- Don't use Unix-style commands like `src/main/java/*/*.java`
+
+**GUI doesn't appear**
+- Make sure you have a display environment
+- Try running from command line, not SSH
+- Check if Java GUI libraries are installed
 
 ## Contributing
 
