@@ -1,0 +1,556 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Page setup
+\geometry{margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Secure Chat Application}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Computer Science Project Report}
+
+% Colors for code listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code listing style
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Secure Chat Application Report},
+    pdfpagemode=FullScreen,
+}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\huge\bfseries Secure Chat Application}\\[0.5cm]
+    {\Large End-to-End Encrypted Messaging System}\\[1.5cm]
+    
+    {\large\bfseries Project Report}\\[2cm]
+    
+    \begin{tabular}{ll}
+        \textbf{Student Name:} & [Your Name] \\[0.3cm]
+        \textbf{Student ID:} & [Your Student ID] \\[0.3cm]
+        \textbf{Course:} & [Course Name/Code] \\[0.3cm]
+        \textbf{Instructor:} & [Instructor Name] \\[0.3cm]
+        \textbf{Institution:} & [University/College Name] \\[0.3cm]
+        \textbf{Date:} & \today \\
+    \end{tabular}
+    
+    \vfill
+    
+    \begin{abstract}
+    This report presents the design, implementation, and analysis of a secure chat application developed in Java. The application demonstrates end-to-end encryption using RSA cryptography, modern user interface design, and secure coding practices. The system provides a comprehensive solution for encrypted communication while maintaining usability and security standards.
+    \end{abstract}
+    
+    \vfill
+    
+\end{titlepage}
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% List of Figures
+\listoffigures
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+The Secure Chat Application is a Java-based desktop messaging system that implements end-to-end encryption using RSA cryptography. This project demonstrates the practical application of cybersecurity principles, software engineering best practices, and modern user interface design.
+
+\subsection{Objectives}
+The primary objectives of this project include:
+\begin{itemize}
+    \item Implement secure communication using RSA encryption
+    \item Design a modern, user-friendly interface
+    \item Demonstrate secure coding practices
+    \item Create a scalable and maintainable software architecture
+    \item Provide educational value for cybersecurity concepts
+\end{itemize}
+
+\subsection{Scope and Limitations}
+This application serves as an educational demonstration of secure messaging principles. While it implements robust encryption, it is designed for local network use and educational purposes rather than production deployment.
+
+\section{Literature Review and Background}
+
+\subsection{Cryptographic Foundations}
+RSA (Rivest-Shamir-Adleman) encryption is an asymmetric cryptographic algorithm that uses a pair of keys: a public key for encryption and a private key for decryption. The security of RSA relies on the computational difficulty of factoring large prime numbers.
+
+\subsection{Secure Communication Principles}
+End-to-end encryption ensures that only the communicating users can read the messages. The application implements this by encrypting messages with the recipient's public key, ensuring that only the recipient with the corresponding private key can decrypt the message.
+
+\subsection{Modern UI Design Principles}
+The application follows contemporary design principles including:
+\begin{itemize}
+    \item Consistent color schemes and typography
+    \item Interactive feedback and hover effects
+    \item Card-based layouts for better organization
+    \item Intuitive navigation and user flow
+\end{itemize}
+
+\section{System Architecture and Design}
+
+\subsection{Architecture Overview}
+The application follows the Model-View-Controller (MVC) architectural pattern, providing clear separation of concerns and maintainable code structure.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{screenshots/architecture_diagram.png}
+    \caption{System Architecture Diagram}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{Package Structure}
+The application is organized into four main packages:
+
+\begin{itemize}
+    \item \textbf{controller}: Application main controller and initialization
+    \item \textbf{model}: Data models and business logic
+    \item \textbf{security}: Encryption utilities and security components
+    \item \textbf{view}: User interface components and views
+\end{itemize}
+
+\subsection{Class Diagram}
+The following diagram illustrates the relationships between major classes:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{screenshots/class_diagram.png}
+    \caption{Class Diagram}
+    \label{fig:class_diagram}
+\end{figure}
+
+\section{Implementation Details}
+
+\subsection{Security Implementation}
+
+\subsubsection{RSA Encryption}
+The RSA encryption is implemented in the \texttt{RSAUtil} class, providing methods for key generation, encryption, and decryption:
+
+\begin{lstlisting}[language=Java, caption=RSA Key Generation]
+public static KeyPair generateKeyPair() {
+    try {
+        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+        generator.initialize(2048);
+        return generator.generateKeyPair();
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to generate RSA key pair", e);
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Message Encryption Process}
+Messages are encrypted using the recipient's public key, ensuring that only the intended recipient can decrypt and read the message.
+
+\subsubsection{Password Security}
+User passwords are hashed using SHA-256 before storage, preventing plain-text password exposure.
+
+\subsection{User Interface Implementation}
+
+\subsubsection{Modern Design System}
+The application implements a consistent design system with:
+\begin{itemize}
+    \item Primary color: \#4080FF (Blue)
+    \item Secondary color: \#6C757D (Gray)
+    \item Success color: \#28A745 (Green)
+    \item Background: \#F8F9FA (Light Gray)
+\end{itemize}
+
+\subsubsection{Interactive Components}
+All interactive elements include hover effects, focus states, and visual feedback to enhance user experience.
+
+\section{User Interface Design}
+
+\subsection{Login Interface}
+The login interface provides a clean, modern entry point to the application with secure authentication.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{screenshots/login_view.png}
+    \caption{Login Interface}
+    \label{fig:login}
+\end{figure}
+
+Key features of the login interface:
+\begin{itemize}
+    \item Modern card-based design
+    \item Input validation and security checks
+    \item Demo user credentials for testing
+    \item Responsive button interactions
+\end{itemize}
+
+\subsection{Registration Interface}
+The registration interface allows new users to create secure accounts with proper validation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{screenshots/register_view.png}
+    \caption{User Registration Interface}
+    \label{fig:register}
+\end{figure}
+
+Registration features include:
+\begin{itemize}
+    \item Input field validation
+    \item Password strength requirements
+    \item Automatic key pair generation
+    \item Success confirmation feedback
+\end{itemize}
+
+\subsection{Main Dashboard}
+The main dashboard provides access to core application features through an intuitive interface.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{screenshots/main_dashboard.png}
+    \caption{Main Application Dashboard}
+    \label{fig:dashboard}
+\end{figure}
+
+Dashboard components:
+\begin{itemize}
+    \item Personalized welcome message
+    \item Feature cards for navigation
+    \item User information display
+    \item Modern iconography
+\end{itemize}
+
+\subsection{Chat Interface}
+The chat interface is the core of the application, providing secure messaging capabilities.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{screenshots/chat_interface.png}
+    \caption{Secure Chat Interface}
+    \label{fig:chat}
+\end{figure}
+
+Chat interface features:
+\begin{itemize}
+    \item Message bubble design
+    \item Real-time encryption status
+    \item User selection sidebar
+    \item Modern input controls
+\end{itemize}
+
+\subsection{Course Materials Viewer}
+The course viewer displays educational content related to cybersecurity.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{screenshots/course_viewer.png}
+    \caption{Course Materials Interface}
+    \label{fig:course}
+\end{figure}
+
+\subsection{User Management Interface}
+The participant list shows all registered users in the system.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{screenshots/user_list.png}
+    \caption{Registered Users Interface}
+    \label{fig:users}
+\end{figure}
+
+\section{Security Analysis}
+
+\subsection{Encryption Strength}
+The application uses 2048-bit RSA encryption, which is currently considered secure for most applications. The key size provides adequate protection against current computational attacks.
+
+\subsection{Key Management}
+Each user receives a unique RSA key pair upon registration. Private keys remain with the user and are never transmitted or stored centrally.
+
+\subsection{Input Validation}
+The application implements comprehensive input validation to prevent:
+\begin{itemize}
+    \item SQL injection attacks
+    \item Cross-site scripting (XSS)
+    \item Command injection
+    \item Buffer overflow attempts
+\end{itemize}
+
+\subsection{Security Limitations}
+Current security limitations include:
+\begin{itemize}
+    \item No salt in password hashing
+    \item In-memory key storage only
+    \item No certificate authority validation
+    \item Limited session management
+\end{itemize}
+
+\section{Testing and Validation}
+
+\subsection{Functional Testing}
+The application underwent comprehensive functional testing including:
+\begin{itemize}
+    \item User registration and authentication
+    \item Message encryption and decryption
+    \item User interface responsiveness
+    \item Error handling and validation
+\end{itemize}
+
+\subsection{Security Testing}
+Security testing focused on:
+\begin{itemize}
+    \item Encryption algorithm verification
+    \item Input validation effectiveness
+    \item Password security measures
+    \item Key generation randomness
+\end{itemize}
+
+\subsection{Usability Testing}
+Usability testing evaluated:
+\begin{itemize}
+    \item Interface intuitiveness
+    \item Navigation efficiency
+    \item Visual design effectiveness
+    \item User experience flow
+\end{itemize}
+
+\section{Performance Analysis}
+
+\subsection{Encryption Performance}
+RSA encryption performance was measured for various message sizes. The 2048-bit key size provides a good balance between security and performance for typical message lengths.
+
+\subsection{User Interface Responsiveness}
+The modern UI design maintains responsiveness across different system configurations while providing smooth animations and interactions.
+
+\subsection{Memory Usage}
+The application demonstrates efficient memory usage through proper object management and garbage collection optimization.
+
+\section{Future Enhancements}
+
+\subsection{Immediate Improvements}
+Potential immediate enhancements include:
+\begin{itemize}
+    \item Database integration for persistent storage
+    \item Enhanced password security with salt and pepper
+    \item Session management and timeouts
+    \item Comprehensive test suite expansion
+\end{itemize}
+
+\subsection{Advanced Features}
+Future advanced features could include:
+\begin{itemize}
+    \item Group chat functionality
+    \item File sharing capabilities
+    \item Message history persistence
+    \item Multi-factor authentication
+    \item Mobile application development
+\end{itemize}
+
+\subsection{Security Enhancements}
+Security improvements might include:
+\begin{itemize}
+    \item Certificate-based authentication
+    \item Key rotation mechanisms
+    \item Audit logging system
+    \item Intrusion detection capabilities
+\end{itemize}
+
+\section{Conclusion}
+
+\subsection{Project Summary}
+The Secure Chat Application successfully demonstrates the implementation of end-to-end encrypted communication using modern software development practices. The project achieves its educational objectives while providing a functional and secure messaging platform.
+
+\subsection{Learning Outcomes}
+This project provided valuable experience in:
+\begin{itemize}
+    \item Cryptographic implementation
+    \item Secure software development
+    \item Modern UI/UX design
+    \item Software architecture patterns
+    \item Project documentation and presentation
+\end{itemize}
+
+\subsection{Technical Achievements}
+Key technical achievements include:
+\begin{itemize}
+    \item Successful RSA encryption implementation
+    \item Modern, responsive user interface
+    \item Comprehensive security measures
+    \item Professional code organization
+    \item Extensive documentation
+\end{itemize}
+
+\subsection{Educational Value}
+The project serves as an excellent educational tool for understanding:
+\begin{itemize}
+    \item Practical cryptography applications
+    \item Secure coding principles
+    \item Software engineering best practices
+    \item User interface design principles
+\end{itemize}
+
+\section{References}
+
+\begin{thebibliography}{9}
+
+\bibitem{rsa1978}
+Rivest, R. L., Shamir, A., \& Adleman, L. (1978). A method for obtaining digital signatures and public-key cryptosystems. \textit{Communications of the ACM}, 21(2), 120-126.
+
+\bibitem{schneier2015}
+Schneier, B. (2015). \textit{Applied Cryptography: Protocols, Algorithms and Source Code in C}. John Wiley \& Sons.
+
+\bibitem{owasp2021}
+OWASP Foundation. (2021). \textit{OWASP Top Ten Web Application Security Risks}. Retrieved from https://owasp.org/www-project-top-ten/
+
+\bibitem{oracle2023}
+Oracle Corporation. (2023). \textit{Java Platform, Standard Edition Documentation}. Retrieved from https://docs.oracle.com/javase/
+
+\bibitem{nist2016}
+National Institute of Standards and Technology. (2016). \textit{NIST Special Publication 800-57 Part 1: Recommendations for Key Management}. U.S. Department of Commerce.
+
+\bibitem{gamma1995}
+Gamma, E., Helm, R., Johnson, R., \& Vlissides, J. (1995). \textit{Design Patterns: Elements of Reusable Object-Oriented Software}. Addison-Wesley.
+
+\bibitem{martin2017}
+Martin, R. C. (2017). \textit{Clean Architecture: A Craftsman's Guide to Software Structure and Design}. Prentice Hall.
+
+\bibitem{nielsen2012}
+Nielsen, J. (2012). \textit{Usability Engineering}. Morgan Kaufmann.
+
+\bibitem{krug2014}
+Krug, S. (2014). \textit{Don't Make Me Think, Revisited: A Common Sense Approach to Web Usability}. New Riders.
+
+\end{thebibliography}
+
+\newpage
+
+\section{Appendices}
+
+\subsection{Appendix A: Installation Instructions}
+\begin{lstlisting}[language=bash, caption=Installation Commands]
+# Clone or extract the project
+cd secure-chat-application
+
+# Compile the application
+./build.sh    # Linux/Mac
+build.bat     # Windows
+
+# Or manually compile
+mkdir -p build
+find src/main/java -name "*.java" -exec javac -d build -sourcepath src/main/java {} +
+
+# Run the application
+java -cp build com.securechat.controller.SecureChatApplication
+\end{lstlisting}
+
+\subsection{Appendix B: Demo User Credentials}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Username} & \textbf{Password} & \textbf{Role} \\
+\hline
+admin & admin123 & Administrator \\
+alice & password & Standard User \\
+bob & 123456 & Standard User \\
+charlie & secure & Standard User \\
+\hline
+\end{tabular}
+\caption{Demo User Credentials}
+\label{tab:demo_users}
+\end{table}
+
+\subsection{Appendix C: Project Structure}
+\begin{lstlisting}[caption=Project Directory Structure]
+secure-chat-application/
+├── src/main/java/com/securechat/
+│   ├── controller/
+│   │   └── SecureChatApplication.java
+│   ├── model/
+│   │   ├── User.java
+│   │   ├── Message.java
+│   │   ├── ParticipantListModel.java
+│   │   ├── MessageListModel.java
+│   │   └── CourseModel.java
+│   ├── security/
+│   │   ├── RSAUtil.java
+│   │   └── MessageProxy.java
+│   └── view/
+│       ├── LoginView.java
+│       ├── RegisterView.java
+│       ├── MainAppView.java
+│       ├── ChatView.java
+│       ├── CourseView.java
+│       └── ParticipantListView.java
+├── src/test/java/com/securechat/
+│   └── security/
+│       └── RSAUtilTest.java
+├── resources/
+│   └── course-content.txt
+├── docs/
+│   ├── API.md
+│   ├── SECURITY.md
+│   └── SecureChat_Report.tex
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── LICENSE
+├── .gitignore
+├── pom.xml
+├── build.sh
+└── build.bat
+\end{lstlisting}
+
+\end{document}
