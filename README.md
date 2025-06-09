@@ -112,10 +112,6 @@ java -cp target/classes com.securechat.controller.SecureChatApplication
 4. Push to branch: `git push origin feature/new-feature`
 5. Open a Pull Request
 
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
 ## Educational Purpose
 
 This project demonstrates secure communication concepts for educational purposes. For production use, additional security measures would be required.
