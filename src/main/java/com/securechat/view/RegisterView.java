@@ -19,11 +19,11 @@ public class RegisterView extends JFrame implements Observer {
     private JPasswordField passwordField;
     private JButton registerButton;
 
-    // Modern color scheme
-    private static final Color PRIMARY_COLOR = new Color(64, 128, 255);
-    private static final Color SECONDARY_COLOR = new Color(108, 117, 125);
+    // Improved color scheme for better readability
+    private static final Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private static final Color SECONDARY_COLOR = new Color(73, 80, 87);
     private static final Color SUCCESS_COLOR = new Color(40, 167, 69);
-    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color CARD_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(33, 37, 41);
 
@@ -38,11 +38,12 @@ public class RegisterView extends JFrame implements Observer {
         this.participantModel = participantModel;
         this.participantModel.addObserver(this);
 
-        setTitle("👤 Create New Account - Secure Chat");
-        setSize(450, 500);
+        setTitle("Create New Account - Secure Chat");
+        setSize(520, 600);
         setLocation(h, v);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
+        setMinimumSize(new Dimension(520, 600));
 
         setupModernUI();
         initComponents();
@@ -56,11 +57,11 @@ public class RegisterView extends JFrame implements Observer {
     private void setupModernUI() {
         getContentPane().setBackground(BACKGROUND_COLOR);
 
-        // Set modern fonts
-        UIManager.put("Button.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("Label.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("TextField.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("PasswordField.font", new Font("Segoe UI", Font.PLAIN, 12));
+        // Set readable fonts
+        UIManager.put("Button.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("PasswordField.font", new Font("Arial", Font.PLAIN, 14));
     }
 
     /**
@@ -101,20 +102,21 @@ public class RegisterView extends JFrame implements Observer {
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(BACKGROUND_COLOR);
 
-        JLabel logoLabel = new JLabel("👤");
-        logoLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+        JLabel logoLabel = new JLabel("●");
+        logoLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        logoLabel.setForeground(PRIMARY_COLOR);
         titlePanel.add(logoLabel);
 
-        JLabel titleLabel = new JLabel("Create Account");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        titleLabel.setForeground(PRIMARY_COLOR);
+        JLabel titleLabel = new JLabel("  Create Account");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(TEXT_COLOR);
         titlePanel.add(titleLabel);
 
         headerPanel.add(titlePanel, BorderLayout.CENTER);
 
         // Subtitle
         JLabel subtitleLabel = new JLabel("Join the secure chat community", SwingConstants.CENTER);
-        subtitleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         subtitleLabel.setForeground(SECONDARY_COLOR);
         headerPanel.add(subtitleLabel, BorderLayout.SOUTH);
 
@@ -135,26 +137,26 @@ public class RegisterView extends JFrame implements Observer {
 
         // Welcome text
         JLabel welcomeLabel = new JLabel("Create your secure account", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         welcomeLabel.setForeground(TEXT_COLOR);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        welcomeLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
+        welcomeLabel.setBorder(new EmptyBorder(0, 0, 25, 0));
         cardPanel.add(welcomeLabel);
 
         // User ID field
-        cardPanel.add(createInputField("🆔 User ID", idField = new JTextField()));
-        cardPanel.add(Box.createVerticalStrut(15));
+        cardPanel.add(createInputField("● User ID:", idField = new JTextField()));
+        cardPanel.add(Box.createVerticalStrut(20));
 
         // Username field
-        cardPanel.add(createInputField("👤 Username", pseudoField = new JTextField()));
-        cardPanel.add(Box.createVerticalStrut(15));
+        cardPanel.add(createInputField("● Username:", pseudoField = new JTextField()));
+        cardPanel.add(Box.createVerticalStrut(20));
 
         // Password field
-        cardPanel.add(createInputField("🔑 Password", passwordField = new JPasswordField()));
-        cardPanel.add(Box.createVerticalStrut(25));
+        cardPanel.add(createInputField("● Password:", passwordField = new JPasswordField()));
+        cardPanel.add(Box.createVerticalStrut(30));
 
         // Register button
-        JButton registerBtn = createModernButton("Create Account", SUCCESS_COLOR, Color.WHITE);
+        JButton registerBtn = createModernButton("Create Account", SUCCESS_COLOR, Color.BLACK);
         registerBtn.addActionListener(e -> handleRegistration());
         cardPanel.add(registerBtn);
 
@@ -169,7 +171,7 @@ public class RegisterView extends JFrame implements Observer {
         footerPanel.setBackground(BACKGROUND_COLOR);
         footerPanel.setBorder(new EmptyBorder(20, 0, 0, 0));
 
-        JButton closeButton = createModernButton("Cancel", SECONDARY_COLOR, Color.WHITE);
+        JButton closeButton = createModernButton("Cancel", SECONDARY_COLOR, Color.BLACK);
         closeButton.addActionListener(e -> dispose());
         footerPanel.add(closeButton);
 
@@ -185,18 +187,18 @@ public class RegisterView extends JFrame implements Observer {
         fieldPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 
         JLabel label = new JLabel(labelText);
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        label.setForeground(SECONDARY_COLOR);
-        label.setBorder(new EmptyBorder(0, 0, 5, 0));
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+        label.setForeground(TEXT_COLOR);
+        label.setBorder(new EmptyBorder(0, 0, 8, 0));
         fieldPanel.add(label, BorderLayout.NORTH);
 
-        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setFont(new Font("Arial", Font.PLAIN, 16));
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(206, 212, 218), 1),
-            new EmptyBorder(10, 12, 10, 12)
+            BorderFactory.createLineBorder(new Color(206, 212, 218), 2),
+            new EmptyBorder(12, 15, 12, 15)
         ));
         field.setBackground(Color.WHITE);
-        field.setPreferredSize(new Dimension(0, 40));
+        field.setPreferredSize(new Dimension(0, 45));
 
         // Add focus effects
         field.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -223,14 +225,18 @@ public class RegisterView extends JFrame implements Observer {
      */
     private JButton createModernButton(String text, Color bgColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setForeground(textColor);
         button.setBackground(bgColor);
-        button.setBorder(new EmptyBorder(12, 20, 12, 20));
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(bgColor.darker(), 1),
+            new EmptyBorder(15, 25, 15, 25)
+        ));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
+        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
+        button.setOpaque(true);
 
         // Add hover effects
         button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -276,8 +282,8 @@ public class RegisterView extends JFrame implements Observer {
      * Shows a modern styled dialog.
      */
     private void showModernDialog(String message, String title, int messageType) {
-        UIManager.put("OptionPane.messageFont", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("OptionPane.buttonFont", new Font("Segoe UI", Font.PLAIN, 11));
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 13));
         JOptionPane.showMessageDialog(this, message, title, messageType);
     }
 

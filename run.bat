@@ -44,9 +44,12 @@ echo Starting Secure Chat Application...
 echo.
 echo Demo users you can try:
 echo - admin / admin123
-echo - alice / password  
+echo - alice / password
 echo - bob / 123456
 echo - charlie / secure
+echo.
+echo IMPORTANT: All windows are now properly sized!
+echo No need to resize manually - everything should be visible.
 echo.
 
 REM Run the application

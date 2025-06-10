@@ -17,11 +17,11 @@ public class CourseView extends JFrame implements Observer {
     private CourseModel courseModel;
     private JTextArea courseContentArea;
 
-    // Modern color scheme
-    private static final Color PRIMARY_COLOR = new Color(64, 128, 255);
-    private static final Color SECONDARY_COLOR = new Color(108, 117, 125);
+    // Improved color scheme for better readability
+    private static final Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private static final Color SECONDARY_COLOR = new Color(73, 80, 87);
     private static final Color SUCCESS_COLOR = new Color(40, 167, 69);
-    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color CARD_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(33, 37, 41);
 
@@ -36,12 +36,12 @@ public class CourseView extends JFrame implements Observer {
         this.courseModel = courseModel;
         this.courseModel.addObserver(this);
 
-        setTitle("📚 Course Materials - ID: " + courseModel.getCourseId());
-        setSize(800, 700);
+        setTitle("Course Materials - ID: " + courseModel.getCourseId());
+        setSize(950, 800);
         setLocation(h, v);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(true);
-        setMinimumSize(new Dimension(600, 500));
+        setMinimumSize(new Dimension(950, 800));
 
         setupModernUI();
         initComponents();
@@ -56,10 +56,10 @@ public class CourseView extends JFrame implements Observer {
     private void setupModernUI() {
         getContentPane().setBackground(BACKGROUND_COLOR);
 
-        // Set modern fonts
-        UIManager.put("TextArea.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("Button.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("Label.font", new Font("Segoe UI", Font.PLAIN, 12));
+        // Set readable fonts
+        UIManager.put("TextArea.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Button.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
     }
 
     /**
@@ -103,9 +103,10 @@ public class CourseView extends JFrame implements Observer {
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         titlePanel.setBackground(CARD_COLOR);
 
-        JLabel iconLabel = new JLabel("📚");
-        iconLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 32));
-        iconLabel.setBorder(new EmptyBorder(0, 0, 0, 15));
+        JLabel iconLabel = new JLabel("●");
+        iconLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        iconLabel.setForeground(PRIMARY_COLOR);
+        iconLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
         titlePanel.add(iconLabel);
 
         JPanel textPanel = new JPanel();
@@ -113,12 +114,12 @@ public class CourseView extends JFrame implements Observer {
         textPanel.setBackground(CARD_COLOR);
 
         JLabel titleLabel = new JLabel("Course Materials");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setForeground(TEXT_COLOR);
         textPanel.add(titleLabel);
 
         JLabel idLabel = new JLabel("Course ID: " + courseModel.getCourseId());
-        idLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        idLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         idLabel.setForeground(SECONDARY_COLOR);
         textPanel.add(idLabel);
 
@@ -130,14 +131,14 @@ public class CourseView extends JFrame implements Observer {
         fileInfoPanel.setLayout(new BoxLayout(fileInfoPanel, BoxLayout.Y_AXIS));
         fileInfoPanel.setBackground(CARD_COLOR);
 
-        JLabel fileLabel = new JLabel("📄 " + getFileName(courseModel.getCoursePath()));
-        fileLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        JLabel fileLabel = new JLabel("● " + getFileName(courseModel.getCoursePath()));
+        fileLabel.setFont(new Font("Arial", Font.BOLD, 14));
         fileLabel.setForeground(PRIMARY_COLOR);
         fileLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         fileInfoPanel.add(fileLabel);
 
         JLabel pathLabel = new JLabel(courseModel.getCoursePath());
-        pathLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+        pathLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         pathLabel.setForeground(SECONDARY_COLOR);
         pathLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         fileInfoPanel.add(pathLabel);
@@ -158,10 +159,10 @@ public class CourseView extends JFrame implements Observer {
         // Content area
         courseContentArea = new JTextArea();
         courseContentArea.setEditable(false);
-        courseContentArea.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        courseContentArea.setFont(new Font("Arial", Font.PLAIN, 15));
         courseContentArea.setBackground(CARD_COLOR);
         courseContentArea.setForeground(TEXT_COLOR);
-        courseContentArea.setMargin(new Insets(20, 20, 20, 20));
+        courseContentArea.setMargin(new Insets(25, 25, 25, 25));
         courseContentArea.setLineWrap(true);
         courseContentArea.setWrapStyleWord(true);
 
@@ -187,14 +188,14 @@ public class CourseView extends JFrame implements Observer {
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         footerPanel.setBackground(BACKGROUND_COLOR);
 
-        JButton refreshButton = createModernButton("🔄 Refresh", PRIMARY_COLOR, Color.WHITE);
+        JButton refreshButton = createModernButton("● Refresh", PRIMARY_COLOR, Color.BLACK);
         refreshButton.addActionListener(e -> {
             loadCourseFile(courseModel.getCoursePath());
             showStatusMessage("Content refreshed successfully!");
         });
         footerPanel.add(refreshButton);
 
-        JButton closeButton = createModernButton("✖ Close", SECONDARY_COLOR, Color.WHITE);
+        JButton closeButton = createModernButton("● Close", SECONDARY_COLOR, Color.BLACK);
         closeButton.addActionListener(e -> dispose());
         footerPanel.add(closeButton);
 
@@ -206,12 +207,16 @@ public class CourseView extends JFrame implements Observer {
      */
     private JButton createModernButton(String text, Color bgColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(textColor);
         button.setBackground(bgColor);
-        button.setBorder(new EmptyBorder(8, 16, 8, 16));
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(bgColor.darker(), 1),
+            new EmptyBorder(10, 20, 10, 20)
+        ));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setOpaque(true);
 
         // Add hover effects
         button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -289,6 +294,6 @@ public class CourseView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         loadCourseFile(courseModel.getCoursePath());
-        setTitle("📚 Course Materials - ID: " + courseModel.getCourseId());
+        setTitle("Course Materials - ID: " + courseModel.getCourseId());
     }
 }

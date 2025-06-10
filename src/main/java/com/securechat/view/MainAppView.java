@@ -18,11 +18,11 @@ public class MainAppView extends JFrame {
     private MessageListModel messageModel;
     private ParticipantListModel participantModel;
 
-    // Modern color scheme
-    private static final Color PRIMARY_COLOR = new Color(64, 128, 255);
-    private static final Color SECONDARY_COLOR = new Color(108, 117, 125);
+    // Improved color scheme for better readability
+    private static final Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private static final Color SECONDARY_COLOR = new Color(73, 80, 87);
     private static final Color SUCCESS_COLOR = new Color(40, 167, 69);
-    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color CARD_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(33, 37, 41);
 
@@ -38,11 +38,12 @@ public class MainAppView extends JFrame {
         this.messageModel = messageModel;
         this.participantModel = participantModel;
 
-        setTitle("🏠 Secure Chat - Dashboard");
-        setSize(500, 400);
+        setTitle("Secure Chat - Dashboard");
+        setSize(650, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
+        setMinimumSize(new Dimension(650, 550));
 
         setupModernUI();
         initComponents();
@@ -56,9 +57,9 @@ public class MainAppView extends JFrame {
     private void setupModernUI() {
         getContentPane().setBackground(BACKGROUND_COLOR);
 
-        // Set modern fonts
-        UIManager.put("Button.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("Label.font", new Font("Segoe UI", Font.PLAIN, 12));
+        // Set readable fonts
+        UIManager.put("Button.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
     }
 
     /**
@@ -100,16 +101,16 @@ public class MainAppView extends JFrame {
         welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.Y_AXIS));
         welcomePanel.setBackground(BACKGROUND_COLOR);
 
-        JLabel welcomeLabel = new JLabel("Welcome back, " + user.getPseudoName() + "! 👋");
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        JLabel welcomeLabel = new JLabel("Welcome back, " + user.getPseudoName() + "!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 26));
         welcomeLabel.setForeground(TEXT_COLOR);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         welcomePanel.add(welcomeLabel);
 
-        welcomePanel.add(Box.createVerticalStrut(5));
+        welcomePanel.add(Box.createVerticalStrut(8));
 
         JLabel subtitleLabel = new JLabel("Ready to start secure conversations?");
-        subtitleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         subtitleLabel.setForeground(SECONDARY_COLOR);
         subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         welcomePanel.add(subtitleLabel);
@@ -124,8 +125,8 @@ public class MainAppView extends JFrame {
             new EmptyBorder(10, 15, 10, 15)
         ));
 
-        JLabel userIdLabel = new JLabel("🆔 User ID: " + user.getId());
-        userIdLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        JLabel userIdLabel = new JLabel("User ID: " + user.getId());
+        userIdLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         userIdLabel.setForeground(SECONDARY_COLOR);
         userInfoCard.add(userIdLabel);
 
@@ -145,6 +146,7 @@ public class MainAppView extends JFrame {
         // Chat card
         JPanel chatCard = createFeatureCard(
             "💬", "Secure Chat",
+
             "Start encrypted conversations with other users",
             PRIMARY_COLOR,
             e -> openChatView()
@@ -154,6 +156,7 @@ public class MainAppView extends JFrame {
         // Course card
         JPanel courseCard = createFeatureCard(
             "📚", "Course Materials",
+
             "Access cybersecurity learning resources",
             SUCCESS_COLOR,
             e -> openCourseView()
@@ -178,24 +181,25 @@ public class MainAppView extends JFrame {
 
         // Icon
         JLabel iconLabel = new JLabel(icon);
-        iconLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 36));
+        iconLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        iconLabel.setForeground(accentColor);
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         card.add(iconLabel);
 
-        card.add(Box.createVerticalStrut(15));
+        card.add(Box.createVerticalStrut(18));
 
         // Title
         JLabel titleLabel = new JLabel(title);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setForeground(TEXT_COLOR);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         card.add(titleLabel);
 
-        card.add(Box.createVerticalStrut(8));
+        card.add(Box.createVerticalStrut(12));
 
         // Description
         JLabel descLabel = new JLabel("<html><center>" + description + "</center></html>");
-        descLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        descLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         descLabel.setForeground(SECONDARY_COLOR);
         descLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         card.add(descLabel);
@@ -230,7 +234,7 @@ public class MainAppView extends JFrame {
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footerPanel.setBackground(BACKGROUND_COLOR);
 
-        JButton logoutButton = createModernButton("🚪 Logout", new Color(220, 53, 69), Color.WHITE);
+        JButton logoutButton = createModernButton("Logout", new Color(220, 53, 69), Color.BLACK);
         logoutButton.addActionListener(e -> {
             dispose();
             new LoginView(participantModel, messageModel);
@@ -245,13 +249,17 @@ public class MainAppView extends JFrame {
      */
     private JButton createModernButton(String text, Color bgColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setForeground(textColor);
         button.setBackground(bgColor);
-        button.setBorder(new EmptyBorder(10, 20, 10, 20));
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(bgColor.darker(), 1),
+            new EmptyBorder(12, 25, 12, 25)
+        ));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setOpaque(true);
 
         // Add hover effects
         button.addMouseListener(new java.awt.event.MouseAdapter() {

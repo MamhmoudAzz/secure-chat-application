@@ -178,14 +178,14 @@ public class ParticipantListView extends JFrame implements Observer {
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         footerPanel.setBackground(BACKGROUND_COLOR);
 
-        JButton refreshButton = createModernButton("🔄 Refresh", PRIMARY_COLOR, Color.WHITE);
+        JButton refreshButton = createModernButton("● Refresh", PRIMARY_COLOR, Color.BLACK);
         refreshButton.addActionListener(e -> {
             displayUsers();
             showStatusMessage("User list refreshed!");
         });
         footerPanel.add(refreshButton);
 
-        JButton closeButton = createModernButton("✖ Close", SECONDARY_COLOR, Color.WHITE);
+        JButton closeButton = createModernButton("● Close", SECONDARY_COLOR, Color.BLACK);
         closeButton.addActionListener(e -> dispose());
         footerPanel.add(closeButton);
 

@@ -42,6 +42,9 @@ echo "- alice / password"
 echo "- bob / 123456"
 echo "- charlie / secure"
 echo
+echo "IMPORTANT: All windows are now properly sized!"
+echo "No need to resize manually - everything should be visible."
+echo
 
 # Run the application
 java -cp target/classes com.securechat.controller.SecureChatApplication

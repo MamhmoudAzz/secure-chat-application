@@ -27,11 +27,11 @@ public class ChatView extends JFrame implements Observer {
     private JTextField messageInput = new JTextField();
     private JButton sendButton = new JButton("Send");
 
-    // Modern color scheme
-    private static final Color PRIMARY_COLOR = new Color(64, 128, 255);
-    private static final Color SECONDARY_COLOR = new Color(108, 117, 125);
+    // Improved color scheme for better readability
+    private static final Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private static final Color SECONDARY_COLOR = new Color(73, 80, 87);
     private static final Color SUCCESS_COLOR = new Color(40, 167, 69);
-    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color CARD_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(33, 37, 41);
     private static final Color SENT_MESSAGE_COLOR = new Color(0, 123, 255);
@@ -54,12 +54,12 @@ public class ChatView extends JFrame implements Observer {
 
         this.messageModel.addObserver(this);
 
-        setTitle("💬 " + user.getPseudoName() + " - Secure Chat");
-        setSize(700, 600);
+        setTitle(user.getPseudoName() + " - Secure Chat");
+        setSize(850, 700);
         setLocation(h, v);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(true);
-        setMinimumSize(new Dimension(500, 400));
+        setMinimumSize(new Dimension(850, 700));
 
         setupModernUI();
         initComponents();
@@ -73,11 +73,11 @@ public class ChatView extends JFrame implements Observer {
     private void setupModernUI() {
         getContentPane().setBackground(BACKGROUND_COLOR);
 
-        // Set modern fonts
-        UIManager.put("List.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("ComboBox.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("TextField.font", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("Button.font", new Font("Segoe UI", Font.BOLD, 12));
+        // Set readable fonts
+        UIManager.put("List.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("ComboBox.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Button.font", new Font("Arial", Font.BOLD, 14));
     }
 
     /**
@@ -118,9 +118,10 @@ public class ChatView extends JFrame implements Observer {
         JPanel userPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         userPanel.setBackground(CARD_COLOR);
 
-        JLabel avatarLabel = new JLabel("👤");
-        avatarLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
-        avatarLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+        JLabel avatarLabel = new JLabel("●");
+        avatarLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        avatarLabel.setForeground(PRIMARY_COLOR);
+        avatarLabel.setBorder(new EmptyBorder(0, 0, 0, 15));
         userPanel.add(avatarLabel);
 
         JPanel textPanel = new JPanel();
@@ -128,12 +129,12 @@ public class ChatView extends JFrame implements Observer {
         textPanel.setBackground(CARD_COLOR);
 
         JLabel nameLabel = new JLabel(user.getPseudoName());
-        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
         nameLabel.setForeground(TEXT_COLOR);
         textPanel.add(nameLabel);
 
-        JLabel statusLabel = new JLabel("🔒 End-to-End Encrypted");
-        statusLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        JLabel statusLabel = new JLabel("● End-to-End Encrypted");
+        statusLabel.setFont(new Font("Arial", Font.PLAIN, 13));
         statusLabel.setForeground(SUCCESS_COLOR);
         textPanel.add(statusLabel);
 
@@ -141,8 +142,8 @@ public class ChatView extends JFrame implements Observer {
         headerPanel.add(userPanel, BorderLayout.WEST);
 
         // Online indicator
-        JLabel onlineLabel = new JLabel("🟢 Online");
-        onlineLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        JLabel onlineLabel = new JLabel("● Online");
+        onlineLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         onlineLabel.setForeground(SUCCESS_COLOR);
         headerPanel.add(onlineLabel, BorderLayout.EAST);
 
@@ -158,9 +159,9 @@ public class ChatView extends JFrame implements Observer {
         chatPanel.setBorder(new EmptyBorder(10, 10, 0, 10));
 
         // Style the message list
-        messageList.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        messageList.setFont(new Font("Arial", Font.PLAIN, 15));
         messageList.setBackground(CARD_COLOR);
-        messageList.setBorder(new EmptyBorder(10, 15, 10, 15));
+        messageList.setBorder(new EmptyBorder(15, 20, 15, 20));
         messageList.setSelectionBackground(new Color(230, 240, 255));
         messageList.setCellRenderer(new ModernMessageRenderer());
 
@@ -185,12 +186,12 @@ public class ChatView extends JFrame implements Observer {
         ));
 
         // Message input field
-        messageInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        messageInput.setFont(new Font("Arial", Font.PLAIN, 16));
         messageInput.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(206, 212, 218), 1),
-            new EmptyBorder(10, 15, 10, 15)
+            BorderFactory.createLineBorder(new Color(206, 212, 218), 2),
+            new EmptyBorder(12, 18, 12, 18)
         ));
-        messageInput.setBackground(BACKGROUND_COLOR);
+        messageInput.setBackground(Color.WHITE);
 
         // Add placeholder effect
         messageInput.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -211,8 +212,8 @@ public class ChatView extends JFrame implements Observer {
         inputPanel.add(messageInput, BorderLayout.CENTER);
 
         // Send button
-        sendButton = createModernButton("📤 Send", PRIMARY_COLOR, Color.WHITE);
-        sendButton.setPreferredSize(new Dimension(100, 40));
+        sendButton = createModernButton("► Send", PRIMARY_COLOR, Color.BLACK);
+        sendButton.setPreferredSize(new Dimension(130, 50));
         sendButton.addActionListener(e -> sendMessage());
         inputPanel.add(sendButton, BorderLayout.EAST);
 
@@ -235,16 +236,16 @@ public class ChatView extends JFrame implements Observer {
         sidebarPanel.setPreferredSize(new Dimension(200, 0));
 
         // Title
-        JLabel titleLabel = new JLabel("💬 Send to:");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        JLabel titleLabel = new JLabel("► Send to:");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setForeground(TEXT_COLOR);
-        titleLabel.setBorder(new EmptyBorder(0, 0, 10, 0));
+        titleLabel.setBorder(new EmptyBorder(0, 0, 15, 0));
         sidebarPanel.add(titleLabel, BorderLayout.NORTH);
 
         // Participant dropdown
-        participantDropdown.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        participantDropdown.setBackground(BACKGROUND_COLOR);
-        participantDropdown.setBorder(new EmptyBorder(8, 10, 8, 10));
+        participantDropdown.setFont(new Font("Arial", Font.PLAIN, 14));
+        participantDropdown.setBackground(Color.WHITE);
+        participantDropdown.setBorder(new EmptyBorder(10, 12, 10, 12));
         updateParticipantDropdown();
         sidebarPanel.add(participantDropdown, BorderLayout.CENTER);
 
@@ -256,12 +257,16 @@ public class ChatView extends JFrame implements Observer {
      */
     private JButton createModernButton(String text, Color bgColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setForeground(textColor);
         button.setBackground(bgColor);
-        button.setBorder(new EmptyBorder(10, 15, 10, 15));
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(bgColor.darker(), 1),
+            new EmptyBorder(12, 20, 12, 20)
+        ));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setOpaque(true);
 
         // Add hover effects
         button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -288,6 +293,10 @@ public class ChatView extends JFrame implements Observer {
         }
 
         if (receiverName != null) {
+            // Remove the icon prefix if present
+            if (receiverName.startsWith("● ")) {
+                receiverName = receiverName.substring(2);
+            }
             User receiver = participantModel.getUserByPseudo(receiverName);
             if (receiver != null) {
                 messageProxy.sendEncryptedMessage(user, receiver, content);
@@ -304,7 +313,7 @@ public class ChatView extends JFrame implements Observer {
         participantDropdown.removeAllItems();
         for (User u : participantModel.getParticipants()) {
             if (!u.getPseudoName().equals(user.getPseudoName())) {
-                participantDropdown.addItem("👤 " + u.getPseudoName());
+                participantDropdown.addItem("● " + u.getPseudoName());
             }
         }
     }
@@ -318,11 +327,11 @@ public class ChatView extends JFrame implements Observer {
         for (Message msg : messageModel.getMessages()) {
             if (msg.getSender().equals(user.getPseudoName())) {
                 // Sender sees their original (clear) message
-                msgListModel.addElement("📤 You → " + msg.getReceiver() + ": " + msg.getOriginalContent());
+                msgListModel.addElement("► You → " + msg.getReceiver() + ": " + msg.getOriginalContent());
             } else if (msg.getReceiver().equals(user.getPseudoName())) {
                 // Receiver decrypts encrypted message
                 String displayed = messageProxy.decryptMessage(msg, user);
-                msgListModel.addElement("📥 " + msg.getSender() + " → You: " + displayed);
+                msgListModel.addElement("◄ " + msg.getSender() + " → You: " + displayed);
             }
         }
 
@@ -347,7 +356,7 @@ public class ChatView extends JFrame implements Observer {
             messagePanel.setBorder(new EmptyBorder(8, 10, 8, 10));
 
             String message = value.toString();
-            boolean isSentMessage = message.startsWith("📤 You →");
+            boolean isSentMessage = message.startsWith("► You →");
 
             // Create message bubble
             JPanel bubble = new JPanel(new BorderLayout());
@@ -366,9 +375,9 @@ public class ChatView extends JFrame implements Observer {
             }
 
             // Message text
-            JLabel messageLabel = new JLabel("<html><div style='width: 300px;'>" +
+            JLabel messageLabel = new JLabel("<html><div style='width: 350px;'>" +
                 message.replace("<", "&lt;").replace(">", "&gt;") + "</div></html>");
-            messageLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+            messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             messageLabel.setForeground(TEXT_COLOR);
 
             bubble.add(messageLabel, BorderLayout.CENTER);

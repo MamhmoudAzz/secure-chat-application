@@ -17,13 +17,14 @@ public class LoginView extends JFrame {
     private JTextField pseudoField;
     private JPasswordField passwordField;
 
-    // Modern color scheme
-    private static final Color PRIMARY_COLOR = new Color(64, 128, 255);
-    private static final Color SECONDARY_COLOR = new Color(108, 117, 125);
+    // Improved color scheme for better readability
+    private static final Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private static final Color SECONDARY_COLOR = new Color(73, 80, 87);
     private static final Color SUCCESS_COLOR = new Color(40, 167, 69);
-    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color CARD_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(33, 37, 41);
+    private static final Color BORDER_COLOR = new Color(206, 212, 218);
 
     /**
      * Creates a new modern login view.
@@ -34,11 +35,12 @@ public class LoginView extends JFrame {
     public LoginView(ParticipantListModel participantModel, MessageListModel messageModel) {
         this.participantModel = participantModel;
 
-        setTitle("🔒 Secure Chat - Login");
-        setSize(450, 550);
+        setTitle("Secure Chat - Login");
+        setSize(520, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
+        setMinimumSize(new Dimension(520, 650));
 
         // Set modern look and feel
         setupModernUI();
@@ -57,11 +59,11 @@ public class LoginView extends JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            // Customize UI defaults for modern look
-            UIManager.put("Button.font", new Font("Segoe UI", Font.PLAIN, 12));
-            UIManager.put("Label.font", new Font("Segoe UI", Font.PLAIN, 12));
-            UIManager.put("TextField.font", new Font("Segoe UI", Font.PLAIN, 12));
-            UIManager.put("PasswordField.font", new Font("Segoe UI", Font.PLAIN, 12));
+            // Customize UI defaults for better readability
+            UIManager.put("Button.font", new Font("Arial", Font.PLAIN, 14));
+            UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
+            UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 14));
+            UIManager.put("PasswordField.font", new Font("Arial", Font.PLAIN, 14));
 
         } catch (Exception e) {
             System.err.println("Could not set look and feel: " + e.getMessage());
@@ -106,20 +108,22 @@ public class LoginView extends JFrame {
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(BACKGROUND_COLOR);
 
-        JLabel logoLabel = new JLabel("🔒");
-        logoLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+        JLabel logoLabel = new JLabel("🔐");
+        logoLabel.setFont(new Font("Arial Unicode MS", Font.PLAIN, 32));
+
+        logoLabel.setForeground(PRIMARY_COLOR);
         titlePanel.add(logoLabel);
 
-        JLabel titleLabel = new JLabel("Secure Chat");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        titleLabel.setForeground(PRIMARY_COLOR);
+        JLabel titleLabel = new JLabel("  Secure Chat");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(TEXT_COLOR);
         titlePanel.add(titleLabel);
 
         headerPanel.add(titlePanel, BorderLayout.CENTER);
 
         // Subtitle
         JLabel subtitleLabel = new JLabel("End-to-end encrypted messaging", SwingConstants.CENTER);
-        subtitleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         subtitleLabel.setForeground(SECONDARY_COLOR);
         headerPanel.add(subtitleLabel, BorderLayout.SOUTH);
 
@@ -140,29 +144,29 @@ public class LoginView extends JFrame {
 
         // Welcome text
         JLabel welcomeLabel = new JLabel("Welcome back!", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         welcomeLabel.setForeground(TEXT_COLOR);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        welcomeLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
+        welcomeLabel.setBorder(new EmptyBorder(0, 0, 25, 0));
         cardPanel.add(welcomeLabel);
 
         // Username field
-        cardPanel.add(createInputField("👤 Username", pseudoField = new JTextField()));
-        cardPanel.add(Box.createVerticalStrut(15));
+        cardPanel.add(createInputField("● Username:", pseudoField = new JTextField()));
+        cardPanel.add(Box.createVerticalStrut(20));
 
         // Password field
-        cardPanel.add(createInputField("🔑 Password", passwordField = new JPasswordField()));
-        cardPanel.add(Box.createVerticalStrut(25));
+        cardPanel.add(createInputField("● Password:", passwordField = new JPasswordField()));
+        cardPanel.add(Box.createVerticalStrut(30));
 
         // Login button
-        JButton loginButton = createModernButton("Sign In", PRIMARY_COLOR, Color.WHITE);
+        JButton loginButton = createModernButton("Sign In", PRIMARY_COLOR, Color.BLACK);
         loginButton.addActionListener(e -> attemptLogin(messageModel));
         cardPanel.add(loginButton);
 
         cardPanel.add(Box.createVerticalStrut(15));
 
         // Register button
-        JButton registerButton = createModernButton("Create New Account", BACKGROUND_COLOR, PRIMARY_COLOR);
+        JButton registerButton = createModernButton("Create New Account", BACKGROUND_COLOR, Color.BLACK);
         registerButton.addActionListener(e -> new RegisterView(participantModel, getX() + 50, getY() + 50));
         cardPanel.add(registerButton);
 
@@ -178,12 +182,12 @@ public class LoginView extends JFrame {
         footerPanel.setBorder(new EmptyBorder(20, 0, 0, 0));
 
         JLabel demoLabel = new JLabel("<html><center><b>Demo Users:</b><br>" +
-            "admin/admin123 • alice/password • bob/123456</center></html>", SwingConstants.CENTER);
-        demoLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+            "admin/admin123 &nbsp;&nbsp;•&nbsp;&nbsp; alice/password &nbsp;&nbsp;•&nbsp;&nbsp; bob/123456</center></html>", SwingConstants.CENTER);
+        demoLabel.setFont(new Font("Arial", Font.PLAIN, 13));
         demoLabel.setForeground(SECONDARY_COLOR);
         footerPanel.add(demoLabel, BorderLayout.CENTER);
 
-        JButton exitButton = createModernButton("Exit", new Color(220, 53, 69), Color.WHITE);
+        JButton exitButton = createModernButton("Exit", new Color(220, 53, 69), Color.BLACK);
         exitButton.addActionListener(e -> System.exit(0));
         exitButton.setPreferredSize(new Dimension(80, 30));
         footerPanel.add(exitButton, BorderLayout.EAST);
@@ -200,31 +204,31 @@ public class LoginView extends JFrame {
         fieldPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 
         JLabel label = new JLabel(labelText);
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        label.setForeground(SECONDARY_COLOR);
-        label.setBorder(new EmptyBorder(0, 0, 5, 0));
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+        label.setForeground(TEXT_COLOR);
+        label.setBorder(new EmptyBorder(0, 0, 8, 0));
         fieldPanel.add(label, BorderLayout.NORTH);
 
-        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setFont(new Font("Arial", Font.PLAIN, 16));
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(206, 212, 218), 1),
-            new EmptyBorder(10, 12, 10, 12)
+            BorderFactory.createLineBorder(BORDER_COLOR, 2),
+            new EmptyBorder(12, 15, 12, 15)
         ));
         field.setBackground(Color.WHITE);
-        field.setPreferredSize(new Dimension(0, 40));
+        field.setPreferredSize(new Dimension(0, 45));
 
         // Add focus effects
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
-                    new EmptyBorder(9, 11, 9, 11)
+                    BorderFactory.createLineBorder(PRIMARY_COLOR, 3),
+                    new EmptyBorder(11, 14, 11, 14)
                 ));
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(206, 212, 218), 1),
-                    new EmptyBorder(10, 12, 10, 12)
+                    BorderFactory.createLineBorder(BORDER_COLOR, 2),
+                    new EmptyBorder(12, 15, 12, 15)
                 ));
             }
         });
@@ -238,14 +242,18 @@ public class LoginView extends JFrame {
      */
     private JButton createModernButton(String text, Color bgColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setForeground(textColor);
         button.setBackground(bgColor);
-        button.setBorder(new EmptyBorder(12, 20, 12, 20));
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(bgColor.darker(), 1),
+            new EmptyBorder(15, 25, 15, 25)
+        ));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
+        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
+        button.setOpaque(true);
 
         // Add hover effects
         button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,8 +305,8 @@ public class LoginView extends JFrame {
      * Shows a modern styled dialog.
      */
     private void showModernDialog(String message, String title, int messageType) {
-        UIManager.put("OptionPane.messageFont", new Font("Segoe UI", Font.PLAIN, 12));
-        UIManager.put("OptionPane.buttonFont", new Font("Segoe UI", Font.PLAIN, 11));
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 13));
         JOptionPane.showMessageDialog(this, message, title, messageType);
     }
 
